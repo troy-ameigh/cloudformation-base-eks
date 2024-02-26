@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: 2010-09-09
+CloudFormation-Kubernetes-VPCAWSTemplateFormatVersion: 2010-09-09
 Description: >-
   Shared resources required by all Amazon EKS Quick Start stacks in this region
   (qs-1r0qgtna3).
@@ -182,7 +182,7 @@ Resources:
     Properties:
       LayerName: eks-quickstart-CrHelper
       Description: !Sub crhelper layer - ${RandomStr}
-      CompatibleRuntimes: [python3.7, python3.8, python3.9]
+      CompatibleRuntimes: [python3.9, python3.10, python3.11]
       Content:
         S3Bucket: !Ref LambdaZipsBucket
         S3Key: !Sub ${QSS3KeyPrefix}functions/packages/CrHelperLayer/lambda.zip
@@ -234,7 +234,7 @@ Resources:
       MemorySize: 128
       Role: !Sub arn:${AWS::Partition}:iam::${AWS::AccountId}:role/eks-quickstart-RegisterType
       Layers: [!Ref CrHelperLayer]
-      Runtime: python3.8
+      Runtime: python3.9
         # Bumping this requires CloudFormation Registry interop support
       Timeout: 900
       Tags: [{ Key: RandomStr, Value: !Ref RandomStr }]
